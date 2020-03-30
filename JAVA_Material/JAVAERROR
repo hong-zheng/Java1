@@ -1,0 +1,602 @@
+1、char  两个字节
+2、定义数组（初始化、赋值（第二种方式不可以赋值，只能用于赋值））
+	引用类型变量：本质是指针类型变量，保存地址
+	引用类型对象：保存数据
+	数组类型变量
+	数组类型对象
+
+int[] arr = new int[]{14,5,5,6,4};
+int[] arr={48,9,7,9,8};
+3、排序算法
+	1）冒泡排序
+	for(int i = 0 ;i<length;i++){
+		for(int j = 0;j<length-i-1;j++){
+			if(arr[j]>arr[j+1]){
+				int temp = arr[j];
+				arr[j] = arr[j+1];
+				arr[j+1] = temp ;
+			}
+		}
+	}
+	2）鸽巢排序
+		int[] arr = new int[]{48,6,7,4,13,2,5,67,89,7,8,9};
+		int len = arr.length;
+		int temp[] = new int[89+1];//temp数组长度由arr数组中最大数值加1
+		for(int i = 0;i<len;i++){
+			temp[arr[i]]++;
+		}
+		for(int i=0;i<temp.length;i++){
+			while(temp[i] != 0){
+				temp[i]--;
+			}
+		}
+
+4、二维数组
+int[][] arr = new int[10][];
+arr[0] = new int[12];
+
+5、方法重载
+一个类中存在多个相同方法名，但是参数不同；
+参数不同包括1）个数2）类型
+重载作用：调用的时候自动匹配相应的方法
+6、构造方法
+实质是一个特殊方法，方法名和类名保持一致，无返回值也无void关键字，构造方法不能调用，创建对象时本身调用；
+构造方法的作用：在创建对象的时候由系统调用，创建对象一定会调用构造方法，一般是在构造方法中完成当前对象的初始化工作；
+构造方法也可以重载，可构造多个构造方法（一定满足参数不同的条件）
+
+通常情况下一个类中无定义任何形式的构造方法，编译时会自动添加一个无参构造方法，已定义则系统不会加一个无参构造方法
+
+7、
+javac 编译（语法检查-->转换为字节码）
+java 运行（类从磁盘装载到内存 按照类的定义创建对象 调用构造方法 ）
+
+静态的属于类的 可以使用类名调用
+在静态方法中只能调用静态方法和静态属性
+
+静态方法、构造方法、普通方法都可以重载；
+
+// 字符串静态常量全部大写
+public static final String SCHOOL = "SUST" ;
+
+8、匿名块在创建对象后会自动执行，匿名块比构造方法先执行
+构造方法有标识符
+
+
+代码块：匿名代码块在构造方法之前，静态匿名块在静态代码块之前（当前类被加载到JVM，只执行一次）
+
+
+
+exec sp_helpdb homeWork
+
+backup database homeWork
+to disk='C:\Program Files\Microsoft SQL Server\MSSQL11.SA\MSSQL\Backup/homeWork.bak' 
+with format
+
+
+backup log homeWork
+to disk='C:\Program Files\Microsoft SQL Server\MSSQL11.SA\MSSQL\Backup/homeWork_log.log'
+with norecovery　
+
+
+use homeWork
+create table T_student(
+	s_dept varchar(50),
+	s_class varchar(50),
+	s_no char(11) primary key,
+	s_name varchar(8) not null,
+	s_sex char(2) ,
+	s_birth smalldatetime ,
+	s_id char(18) unique 
+)
+
+create table T_course(
+	c_id char(6),
+	c_name varchar(50) not null ,
+	c_term tinyint ,
+	c_hour tinyint ,
+	c_score decimal(2,1) ,
+	c_category varchar(10) ,
+	primary key(c_id)
+)
+
+
+create table T_average(
+	s_no char(11) ,
+	c_id char(6) ,
+	a_average decimal(4,1) ,
+	c_score decimal(2,1) ,
+	primary key(s_no,c_id)
+)
+
+create table T_user(
+	u_id varchar(10) primary key ,
+	u_name varchar(20) ,
+	u_type varchar(10) ,
+	u_password varchar(20) not null
+)
+
+insert into T_student values('信息与计算科学','信息173班','20171101033','郑洪','男',1998-09-21,'5002211998')
+
+select * from T_student
+
+insert into T_course values('03006','C++',1,64,4.1,'必修')
+select * from T_course
+select c_name from course
+
+insert into T_average values('20171101033','12',80.2,5.1)
+selecT * from T_average
+
+inserT into T_user values('u01','zh','学生','zhenghong')
+select * from T_user
+
+alter table T_student add s_birthday datetime
+go
+
+alter table T_student drop column s_text go
+
+drop table T_course
+
+restrict: 确保只有不存在相关视图和 完整性约束的表才能删除
+cascade: 任何相关视图和完整性约束一并被删除
+cascade
+
+insert into student values('机械','机械173','20171101132','智杰','男',1999-06-21,2016384),
+('英语','英语173','20171101022','喻','女',1999-06-21,201638335),
+('机械1','机械172','20171102032','gan','女',1998-02-21,20163845498),
+('机械2','机械171','20171106032','ming','男',1999-06-01,20163154784)
+select * from student
+
+
+update student set s_dept='计科系' where s_dept = '信息与计算科学'
+
+
+delete from student where s_name = '龙轩婷'
+
+
+
+2019/11/1
+9、Object类中的方法
+getClass() : 返回对象的类名
+例如：
+System.out.println(people.getClass());
+控制台输出：class com.zhenghong.demo.People
+
+10、static关键字
+当申明一个类的属性或方法被static修饰时，意味着该变量或方法是类变量或类方法，与类的任何对象无关；
+ static可以用来修饰：
+ 1）数据：修饰的数据属于类共享的变量或常量；
+ 2）方法：修饰的方法属于整个类的；
+ 3）代码块：修饰的代码块属于整个类的，且只执行一次。类似实例的初始化程序，但每个类（并非对象）只执行一次，主要用于类的初始化；
+ 4）特指静态内部类；
+11、final关键字
+ 1）数据：一个永不改变的常量。 public static final int MAX = 100 ;
+ 2) 方法：不可以覆盖；不能被重写
+ 3）类：不可被继承；
+
+
+
+Java 中直接定义默认都是无小数int类型，有小数double类型；
+
+java.lang.ClassLoader
+类加载器是负责加载类的对象。ClassLoader类是一个抽象类。如果给定类的二进制名称，那么类加载器会试图查找或生成类定义的数据。一般策略是将名称转换为某个文件名，然后从文件系统读取该名称的“类文件”。
+每个 Class 对象 都包含一个对定义它的ClassLoader 的引用
+
+数组类的Class对象不是由类加载器创建的，而是由Java运行时（Runtime）根据需要自动创建。数组类的类加载器由Class.getClassLoader() 返回， 该加载器与其元素类型的类加载器是相同的；如果该元素类型是基本类型，则该数组类没有类加载器。
+
+
+
+.;%JAVA_HOME%\lib
+. 为当前路径，;为分隔前后两个
+
+classpath %Java_Home%\lib // 找类似于System.out.println() 编译时的基础类库
+path %Java_Home%\bin // 找.exe命令
+
+??? /d
+
+C:\Program Files\Java\jdk1.8.0_73\bin>javac -encoding utf-8 E:\JAVA_20191029\less00001/Demo1.java
+
+C:\Program Files\Java\jdk1.8.0_73\bin>java -classpath E:\JAVA_20191029\less00001 Demo1
+
+
+
+12、& 和 && 的区别
+& 位运算符，转换为二进制进行运算， 可作为逻辑运算符非短路式
+&& 只可逻辑运算符短路式
+
+
+13、Java GC 垃圾回收器 回收垃圾对象占用的内存空间 不断的扫描堆区
+finalize() 垃圾回收器回收当前对象占用空间时候调用的方法
+System.gc() ; // 调用finalize()，即将结束程序时执行finalize()函数；
+
+14、
+
+IO：  面向流 	阻塞IO 		无
+NIO:  面向缓冲区 非阻塞IO    选择器
+
+IO和NIO最大的区别就是，IO面向流，而NIO面向缓冲区。JAVA IO面向流意味着每次从流中
+读一个或多个字节，直至读取所有字节，它们被缓存在任何地方。此外，不能前后移动
+流中的数据，如果需要前后移动流中的数据，需要将其缓存到一个缓冲区。Java NIO
+的缓冲导向方法略有不同。数据读取到一个它稍后处理的缓冲区，需要时可在缓冲区前后移动。这就增加了处理过程中的
+灵活性。但是，还需要检查是否该缓冲区中是否包含需要处理的数据。而且，需要确保当更多的数
+读入缓冲区时，不需覆盖缓冲区里尚未处理完的数据。
+
+阻塞与非阻塞IO
+Java IO 的各种流是阻塞的，当一个线程调用read()或write() 时，该线程被阻塞，
+直到有一些数据被读取，或数据被完全写入。该线程在该期间不能再干其他任何事。
+Java NIO 非阻塞，一个单独的线程可以管理多个输入和输出通道（channel）
+
+
+
+
+15、IO
+	基础流（提供基础的管道） FileInputStream
+		功能流（在基础流之上提供一些功能） BufferedInputStream
+		字节流  byte 通道内部流的单位 数据都是字节
+		字符流 char
+		
+		四个基类
+		字节输入流  InputSream FileInputStream(文件字节输入流)
+		字节输出流  OutputStream FileOutputStream(文件字节输出流)
+		字符输入流  Reader
+		字符输出流  Writer
+
+
+16、
+package com.zhenghong.io;
+
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+
+public class Input {
+	public static void main(String[] args) {
+		
+		
+		try {
+			
+			//返回当前流所读取的字节数
+			
+			//读取一个字节（内容）,但是需要字节转字符
+//			int context = instream.read() ;
+//			
+//			while( context >= 0 ){
+//				System.out.println( context );
+//				context = instream.read() ;
+//			}
+			
+			InputStream instream = new FileInputStream("F:\\JAVA 2019,3,21\\less17\\20190526\\Day0526\\src\\com\\hellojava\\demo/demo.java") ;
+			// 创建一个和相应文件大小得字节数组
+			byte[] bs = new byte[instream.available()] ;
+			// 将文件以字节流的形式读到字节数组bs中
+			instream.read(bs) ;
+			// 将字节数组bs转换为字符串
+			String s = new String( bs ) ;
+			System.out.println( s );
+			instream.close();
+			
+			// 定义所需要写出文件的绝对地址
+			OutputStream oStream = new FileOutputStream("F:\\JAVA 2019,3,21\\less17\\20190526\\Day0526\\src\\com\\hellojava\\demo/1.java") ;
+//			读字节数组
+			oStream.write(bs);
+//			刷净字节数组通道
+			oStream.flush();
+			oStream.close();
+			
+			
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
+	}
+}
+
+
+18、类的序列化(Serilizable)
+对象序列化机制，一个对象可以被表示为一个字节序列，该字节序列包括该对象的数据、有关对象的类型的信息和存储在对象中数据的类型。
+将序列化对象写入文件之后，可以从文件中读取出来，并且对它进行反序列化，也就是说，对象的类信息、对象的数据，还有对象中的数据类型可以用来在内存中新建对象
+
+整个过后曾都是JVM独立的,也就是说,在一个平台上序列化的对象可以在另一个完全不同的平台反序列化该对象.
+
+19、ClassCastException 两个类之间不兼容异常
+
+
+20、socket
+计算机通信（地址 IP） 定位一台计算机（多任务）
+
+
+2019/11/12
+
+Servlet
+21、容器
+Tomcat tom猫
+
+1）什么是Servlet？
+sun公司制定的用来 扩展web服务器功能  的  组件规范；
+（1）扩展web服务器功能
+apache web server  www.apache.org
+静态资源
+web服务器通常只能处理静态资源请求（即需要事先将html文件准备好）
+，可以使用Serlet来扩展（即web服务器可以通过调用Servlet来处理）
+动态资源的请求，比如访问数据库
+	（2）组件规范
+		1）什么是组件
+		符合一定规范，实现部分功能，并且需要部署到相应的容器里面才能
+		运行的软件模块
+
+		Servlet是一个组件，需要部署到相应的sevlet容器里面才
+		运行
+		轮胎（组件）：成本、时间、维护
+
+		Servlet 单独是无用的
+
+		2）什么是容器
+		符合一定规范，提供组件的运行环境的程序
+
+		tomcat 就是一个容器，提供了servlet的运行环境
+
+2、如何写一个Servlet？
+step1，写一个java类，implements Servlet
+extends HttpServlet抽象类
+注意：一般选择继承
+step2，编译
+step3,打包(变成一个组件)
+ 创建一个具有如下结构的文件夹
+ 	appname(应用名) dangdang
+ 		WEB-INF : 固定名字
+ 			classes:固定，放step2中编译之后的字节码文件
+ 		lib:（可选，放jar文件，jdbc驱动）
+ 		web.xml  （部署描述文件）
+
+step4,部署到tomcat容器里
+	将step3创建好的整个文件夹拷贝到servlet容器相应的位置
+	注：可以使用jar 命令将step3创建好的整个文件夹压缩成
+	一个“.war”为后缀名的文件，然后拷贝
+step5,启动容器。访问servlet，
+	http://ip:port:/appname/url-pattern
+	协议  容器的ip地址
+	注意：url-pattern在web.xml文件中定义
+
+3、Tomcat安装（www.apache.org）
+step1,将tomcat的安装文件解压到相应的目录
+step2，配置环境变量
+	JAVA_HOME:jdk的安装路径
+	CATALINA_HOME:tomcat的安装路径
+	PATH：具体命令所在路径
+step3，启动tomcat
+cd F:\EX\servlet\apache-tomcat-8.5.45/bin
+
+执行以下脚本
+sh startup.sh
+step4,关闭tomcat
+sh shutdown.sh
+
+注意：tomcat开源容器
+
+http://localhost:8080/appname/url-pattern
+http://localhost:8080/firstweb/hello
+
+
+ms-appx-web://microsoft.microsoftedge/assets/errorpages/dnserror.html?ErrorStatus=0x800C0005#file:///E:/JAVA_20191029/less00001/Project1/sust/WebContent/WEB-INF/sust/hello?username=hello
+
+
+2019/11/13
+
+4、servlet是如何运行的？
+step1：浏览器依据ip,port建立连接 ； 
+step2：浏览器将相关数据（比如请求参数）打包，然后发送请求。
+step3：容器解析请求数据包，并且将解析得到的
+数据封装到request对象，同时创建一个response对象
+step4：容器创建一个servlet对象，然后调用该对西昂的service方法;
+注：容器会将request和response作为参数传递进来，可以通过request获得请求参数，也可以将处理结果写到response
+step5：容器读取到response中的处理结果，然后将处理结果打包发送给浏览器。
+step6：浏览器解析响应数据包，生成相应的页面。
+
+5、常见问题
+（1）404
+注：状态吗（一个三位数，由w3c定义）
+含义：服务器依据请求地址找不到相应的资源
+产生原因：a、没有部署该应用
+		b、<servlet-name>不一致，对应的<servlet-class>要是具体的相应类
+		c、请求地址写错，检查请求地址
+（2）500
+系统出错
+产生原因
+程序在运行过程中出错
+a、没有继承servlet
+b、<servlet-class>实际类名（全称）
+（3）405
+找不到处理方法
+service方法不规范
+该方法有严格要求，重写
+
+
+2019/11/13
+1、http协议
+(1) 什么是http协议
+ 是由w3c制定的一种网络应用层协议，制定了浏览器与web服务器之间如何通信以及相应的数据包格式
+ 1）如何通信
+ step1,建立连接
+ step2,发送请求
+ step3,发送响应
+ step4,关闭连接
+特点：一次请求，一次连接
+如果浏览器需要发送新的请求，就需要建立新的连接，
+优点是，服务器可以利用有限的连接为尽可能多的请求服务
+（2）数据包结构
+ 1）请求数据包
+  请求行(<=2k)
+  消息头
+  实体内容
+  只有当请求方式为post时，实体里面才会有数据（请求参数）
+2）响应数据包
+状态行（协议类型和版本 状态码 状态描述）
+
+消息头
+	服务器也可以发送一些消息头给浏览器，
+	例如content-type返回浏览器返回数据类型
+实体内容
+	程序的处理结果，浏览器会解析其中的数据，生成相应的页面
+
+（3）两种请求方式
+	1）get请求
+		直接输入某个请求地址
+		点击链接
+		表单默认提交的方式（<form mehtod="get"></form>）
+		特点：
+		会将参数添加到请求地址后面（日志文件）
+		只能提交少量数据
+		会将请求数据显示在浏览器地址栏，不安全
+		比如路由器就会记录包含参数的请求地址，将其放在日志文件中
+
+	2）post请求
+		哪一些情况下会发post请求
+		表单中的method="post"
+
+
+
+unicode 两个字节表是一个字符
+char 两个字节
+本地字符集
+unicode-->gbk,utf-8编码
+gbk,utf-8-->unicode 解码
+
+
+2019/11/14
+
+out.println();编码规则
+iso-8859-1编码
+response.setContentType("text/html;charset=utf-8") ;
+
+表单中有中文参数值
+（1）为什么会有乱码
+表单提交的时候，浏览器会对表单中的中文参数值对其进行编码
+注：会按照打开该表单所在页面字符集对其进行编码
+保证表单提交时，按照指定字符集编码
+<meta content="text/html;charset=utf-8">
+服务器使用对应的字符集来解码
+request.setCharacterEncoding("utf-8");
+注：只针对post有效
+方式二：
+get,post都有效
+// new String() 构造器
+uname = new String(uname.getBytes("iso-8859-1"),"utf-8") ;
+
+dos窗口
+cmd>>iPconfig
+10.110.210.130
+
+public class Servlet extends HttpServlet{
+	public void service(
+		HttpServletRequest request ,
+		HttpServletResponse response
+	) throws IOException , ServletException {
+
+	}
+}
+
+4、读取请求参数值
+  String request.getParameter( String paramName );
+  注意：paramName 必须与实际传送过来的参数名一致，如果不一致将会获得null；
+  有可能获得空字符串"";
+
+
+  	Enumeration getParameterNames()
+返回一个 String对象的枚举，包含在该请求中包含的参数的名称。
+
+ String[] request.getParameterValues(String paramNames) ;
+ 当有多个参数名相同时，用该方法
+ 获得对应参数名的值
+ 对于多选框和单选框，如果不选择任何选项的话，会获得null
+ 引起空指针异常
+NullPointerException
+
+5、使用jdbc访问数据库
+step1,需要将jdbc驱动（jar文件）拷贝到WEB-INF\lib下
+step2，使用jdbc提供的一套api来访问数据库
+
+mysql 数据库使用简单
+开源在某种程度上说明其安全性
+
+
+2019/11/14
+http协议
+ what?
+  w3c 规定了服务器与浏览器通信的结构
+
+ 数据包
+ 	消息头
+ 	状态码
+ 	get/post
+ 	get:直接输入地址，链接，表单默认地址
+ 	 特点：会将请求参数加在请求地址中，请求行中只能放2k的内容
+ 	 不安全，全部显示在地址栏
+ 	post
+
+servlet输出中文
+服务器端默认iso-8859-1解析编码
+out.println() iso-8859-1
+
+表单包含有中文参数，打开此页面
+<meta http-equiv="content-type" content="text/html;
+character=utf-8">
+new String(uname.getBytes()...) ;解码
+
+6、jdbc
+EMS 员工管理系统 B/S架构
+加上数据库的增删改查
+
+构建一个连接数据库的Servlet项目
+在lib包下面必须要添加类似于mysql-connector-java-8.0.16.jar的jar包
+
+
+添加驱动//该驱动需要抛ClassNotFoundException
+Class.forName("com.mysql.cj.jdbc.Driver") ;
+
+String id = request.getParameter("stuId") ;
+Connection conn = null ;
+PreparedStatement prep = null ;
+// 其中url为包含 数据库名称demo的一个字符串
+String url = "jdbc:mysql://localhost:3306/demo?
+characterEncoding=utf-8&useSSL=true&serverTimezone=UTC
+" ;
+conn = DriverManager.getConnection(url,"root","zxcvbnm") ;
+String sql = "insert into student(stuId,stuName,stuAge) 
+values(?,?,?)" ;
+prep = conn.prepareStatement(sql) ;
+// 对每一个参数进行具体的处理
+prep.setString(1,id) ;
+prep.setString(2,name) ;
+prep.setInt(3,Integer.parseInt(age)) ;
+prep.executeUpdate() ;
+
+2019/11/16
+http 协议浏览器<-->服务器
+
+在服务器端对请求做检查
+
+
+7、重定向
+ （1）什么是重定向
+ 服务器通知浏览器向一个新的地址发送请求。
+ 注意：可以发送一个302状态码和一个Location
+ 消息头（该消息头包含了一个地址，称之为重定向地址）
+ 浏览器收到之后，会立即向重定向地址发请求。
+  （2）如何重定向
+  response.sendRedirect(String url);
+  注意：
+   a:url 就是重定向地址
+   b:重定向后面的代码也会执行，到有重定向
+   的地方，先将servlet里面的代码执行完，再重定向
+   c:重定向之后，容器会先清空response对象中保存的数据；
+   （3）特点
+  	a:重定向地址是任意的；
+  	b:重定向之后浏览器的地址会发生改变；
+  	删除的时候用重定向
+
+  	EMS 员工管理系统
+
+  	entity
+  	 实体类，用来保存从数据库查询出来的数据
